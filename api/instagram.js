@@ -14,11 +14,11 @@ export default async function handler(req, res) {
   try {
     const origin = req.headers.origin;
 
-    // CORS setup
-    if (!origin || !allowedOrigins.includes(origin)) {
-      res.status(403).json({ error: "Not allowed by CORS" });
-      return;
-    }
+    // // CORS setup
+    // if (!origin || !allowedOrigins.includes(origin)) {
+    //   res.status(403).json({ error: "Not allowed by CORS" });
+    //   return;
+    // }
 
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
