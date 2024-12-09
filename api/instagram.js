@@ -16,12 +16,16 @@ export default async function handler(req, res) {
   try {
     const origin = req.headers.origin;
 
-    // CORS setup
-    if (!origin || !allowedOrigins.includes(origin)) {
-      res.status(403).json({ error: "Not allowed by CORS" });
-      return;
+    // Add CORS headers
+    if (allowedOrigins.includes(origin)) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+    } else {
+      res.setHeader("Access-Control-Allow-Origin", "null"); // Fallback for unknown origins
     }
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
+    // Handle preflight request
     if (req.method === "OPTIONS") {
       res.status(204).end();
       return;
