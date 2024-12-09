@@ -58,12 +58,19 @@ export default async function handler(req, res) {
           thumbnail_url,
           children,
         } = item;
+        console.log(item);
         if (media_type === "IMAGE") {
           return { type: "image", url: media_url, caption, permalink };
         } else if (media_type === "VIDEO") {
           return { type: "video", url: media_url, caption, permalink };
         } else if (media_type === "CAROUSEL_ALBUM") {
-          return { type: "carousel", children, caption, permalink };
+          return {
+            type: "carousel",
+            children,
+            caption,
+            permalink,
+            url: media_url,
+          };
         }
         return null;
       })
